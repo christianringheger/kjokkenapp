@@ -217,7 +217,9 @@
         "pres": "Server i stor salatskål (rosa eller blå) med focaccia og smør ved siden av.",
         "layers": []
       },
-      "station": "bong"
+      "station": "bong",
+      "image": "https://firebasestorage.googleapis.com/v0/b/jordbaerpikene-kjokken.firebasestorage.app/o/media%2Fdishes%2Fd0%2F1781703404594_JP_Bong_og_pa_smurtmanual_Sommer_2026.jpeg?alt=media&token=2f220f00-cad3-413b-bf16-ddf5786b3582",
+      "video": "https://player.vimeo.com/video/1167893598"
     },
     {
       "name": "Vår Cæsarsalat",
@@ -419,7 +421,9 @@
         "pres": "Server i stor salatskål (rosa eller blå) med focaccia og timian eller basilikum) smør ved siden av.",
         "layers": []
       },
-      "station": "bong"
+      "station": "bong",
+      "image": "https://firebasestorage.googleapis.com/v0/b/jordbaerpikene-kjokken.firebasestorage.app/o/media%2Fdishes%2Fd1%2F1781703462692_JP_Bong_og_pa_smurtmanual_Sommer_2026_3.jpeg?alt=media&token=71648038-2cb8-4bd0-b98d-03cad1fcbf9f",
+      "video": "https://player.vimeo.com/video/1059648855"
     },
     {
       "name": "Kylling- og Baconsalat",
@@ -629,7 +633,9 @@
         "pres": "timian eller basilikum) Server i stor salatskål (rosa eller blå) med focaccia og smør ved siden av.",
         "layers": []
       },
-      "station": "bong"
+      "station": "bong",
+      "image": "https://firebasestorage.googleapis.com/v0/b/jordbaerpikene-kjokken.firebasestorage.app/o/media%2Fdishes%2Fd2%2F1781703477938_JP_Bong_og_pa_smurtmanual_Sommer_2026_2.jpeg?alt=media&token=93ff6c33-6c2f-401b-93c5-6a39d0631b16",
+      "video": "https://player.vimeo.com/video/1059648917"
     },
     {
       "name": "Rødbeteburger med Fries",
