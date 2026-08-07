@@ -65,5 +65,6 @@ export function renderForside() {
     <main class="wrap">
       <p class="forside-lead">Kjøkkenmanual for Jordbærpikene. Velg hva du vil se.</p>
       <div class="tiles">${TILES.map(tile).join("")}</div>
+      <footer class="forside-foot"><a href="#/admin">Admin</a></footer>
     </main>`;
 }

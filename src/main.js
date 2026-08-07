@@ -22,6 +22,7 @@ import { renderGuide } from "./ui/guide.js";
 import { renderArkiv } from "./ui/arkiv.js";
 import { renderForside } from "./ui/forside.js";
 import { initMedia } from "./lib/media.js";
+import { renderAdmin } from "./ui/admin.js";
 import {
   renderHandleShell,
   renderHandleList,
@@ -284,6 +285,9 @@ function render() {
     window.scrollTo(0, 0);
   } else if (route === "meny") {
     renderList();
+  } else if (route === "admin") {
+    renderAdmin(app);
+    window.scrollTo(0, 0);
   } else {
     app.innerHTML = renderForside();
     window.scrollTo(0, 0);

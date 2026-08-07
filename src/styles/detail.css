@@ -3,6 +3,74 @@
   max-width: 720px;
 }
 
+/* ---------- Admin ---------- */
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 360px;
+  margin-top: 18px;
+}
+.admin-input {
+  font: inherit;
+  font-size: 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--panel);
+  color: var(--ink);
+}
+.admin-input:focus {
+  outline: none;
+  border-color: var(--camel);
+  box-shadow: 0 0 0 3px rgba(205, 161, 119, 0.25);
+}
+.admin-btn {
+  font: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  background: var(--coral);
+  border: none;
+  border-radius: var(--pill);
+  padding: 11px 22px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+.admin-btn:hover:not(:disabled) {
+  background: var(--coral-deep);
+}
+.admin-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.admin-btn-ghost {
+  margin-top: 24px;
+  color: var(--muted);
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+.admin-btn-ghost:hover:not(:disabled) {
+  background: var(--panel);
+  border-color: var(--coral);
+  color: var(--coral);
+}
+.admin-err {
+  color: var(--coral-deep);
+  font-weight: 600;
+  font-size: 14px;
+}
+.admin-log {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  font-size: 13px;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
 /* ---------- Medieblokk (bilde + video) øverst ---------- */
 .media {
   position: relative;

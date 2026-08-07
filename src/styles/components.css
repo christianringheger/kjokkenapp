@@ -417,6 +417,19 @@
   color: var(--muted);
   font-size: 13.5px;
 }
+.forside-foot {
+  margin-top: 28px;
+  text-align: right;
+}
+.forside-foot a {
+  color: var(--faint);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+.forside-foot a:hover {
+  color: var(--coral);
+}
 
 /* ---------- Lightbox (bilde/video fullskjerm) ---------- */
 body.lb-open {
