@@ -1,0 +1,431 @@
+/* Detaljsiden trenger ikke like brei kolonne som rutenettet */
+.detail {
+  max-width: 720px;
+}
+
+/* ---------- Medieblokk (bilde + video) øverst ---------- */
+.media {
+  position: relative;
+  margin: 0 0 18px;
+}
+.media-img {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: zoom-in;
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.media-img img {
+  display: block;
+  width: 100%;
+  max-height: 340px;
+  object-fit: cover;
+}
+.media-zoom {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(29, 24, 19, 0.55);
+  color: #fff;
+}
+.media-zoom svg {
+  width: 17px;
+  height: 17px;
+}
+.media-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 66px;
+  height: 66px;
+  border: none;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(29, 24, 19, 0.35);
+}
+.media-play svg {
+  width: 30px;
+  height: 30px;
+  margin-left: 3px;
+}
+.media-play:hover {
+  background: var(--green-deep);
+}
+.media-vidbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: inherit;
+  font-weight: 700;
+  color: #fff;
+  background: var(--green);
+  border: none;
+  border-radius: var(--pill);
+  padding: 11px 20px;
+  cursor: pointer;
+}
+.media-vidbtn svg {
+  width: 20px;
+  height: 20px;
+}
+.media-vidbtn:hover {
+  background: var(--green-deep);
+}
+
+/* «Uavklart»-varsel i Allergener-seksjonen */
+.review-banner {
+  background: var(--warn-bg);
+  color: var(--warn-ink);
+  border: 1px solid var(--warn-line);
+  border-radius: var(--r-sm);
+  padding: 10px 13px;
+  font-size: 13.5px;
+  line-height: 1.45;
+  margin-bottom: 12px;
+}
+.review-banner strong {
+  font-weight: 800;
+}
+
+/* ---------- Glutenfri-guide ---------- */
+.lead {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.guide-list {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  line-height: 1.5;
+}
+.guide-steps {
+  margin: 0;
+  padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  line-height: 1.5;
+}
+.guide-steps li::marker {
+  color: var(--coral);
+  font-family: var(--signal);
+  font-weight: 700;
+}
+.guide-swap {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.guide-swap li {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 12px;
+  align-items: baseline;
+  padding: 10px 13px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+}
+.swap-from {
+  font-weight: 700;
+}
+.swap-to {
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.4;
+}
+.guide-src {
+  margin: 22px 0 0;
+  font-size: 12.5px;
+  color: var(--faint);
+}
+
+/* ---------- Arkiv ---------- */
+.arkiv-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.arkiv-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease;
+}
+.arkiv-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--coral);
+}
+.arkiv-ic {
+  flex: 0 0 auto;
+  color: var(--coral);
+}
+.arkiv-ic svg {
+  width: 30px;
+  height: 30px;
+}
+.arkiv-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.arkiv-title {
+  font-weight: 700;
+  font-size: 16px;
+}
+.arkiv-desc {
+  color: var(--muted);
+  font-size: 14px;
+}
+.arkiv-meta {
+  color: var(--faint);
+  font-size: 12px;
+  font-family: var(--signal);
+  letter-spacing: 0.03em;
+}
+.arkiv-open {
+  flex: 0 0 auto;
+  color: var(--coral);
+  font-weight: 700;
+  font-size: 13.5px;
+  white-space: nowrap;
+}
+.arkiv-card-pending {
+  opacity: 0.7;
+  box-shadow: none;
+  cursor: default;
+}
+.arkiv-card-pending:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--line);
+}
+.arkiv-card-pending .arkiv-ic {
+  color: var(--faint);
+}
+.arkiv-pending {
+  flex: 0 0 auto;
+  color: var(--warn-ink);
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-line);
+  border-radius: var(--pill);
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+@media (max-width: 520px) {
+  .arkiv-open {
+    display: none;
+  }
+}
+@media (max-width: 520px) {
+  .guide-swap li {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+}
+
+/* Toppen av detaljsiden */
+.detail-head {
+  margin-bottom: 4px;
+}
+.detail-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+}
+.detail-head h1 {
+  font-family: var(--signal);
+  font-weight: 800;
+  font-size: clamp(23px, 5vw, 32px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.detail-title .price {
+  font-size: clamp(18px, 4vw, 24px);
+}
+.detail-cat {
+  margin: 8px 0 0;
+  font-family: var(--signal);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--camel);
+}
+.detail-head .badges {
+  margin-top: 12px;
+}
+.metalist {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.metalist li {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 4px 10px;
+}
+
+/* Seksjoner */
+.dsec {
+  margin-top: 28px;
+}
+.dsec-title {
+  font-family: var(--signal);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--coral);
+  border-bottom: 1.5px solid var(--line);
+  padding-bottom: 8px;
+  margin-bottom: 14px;
+}
+
+/* Ingrediens-/komponentliste */
+.inglist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.inglist li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.qty {
+  min-width: 64px;
+  font-family: var(--signal);
+  font-weight: 700;
+  color: var(--coral);
+}
+.iname {
+  font-weight: 500;
+}
+.inglist .al-row {
+  margin-left: auto;
+}
+.inglist .al-ic {
+  width: 17px;
+  height: 17px;
+}
+.rlink {
+  color: var(--green-deep);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.rlink:hover {
+  color: var(--coral);
+}
+
+/* Allergen-brikker (ikon + navn) */
+.al-chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.al-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--block-bg);
+  border-radius: var(--pill);
+  padding: 5px 12px 5px 10px;
+}
+.al-chip .al-ic {
+  width: 18px;
+  height: 18px;
+  color: var(--coral-deep);
+}
+
+/* Fremgangsmåte */
+.steps {
+  margin: 0;
+  padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.steps li {
+  line-height: 1.45;
+  padding-left: 4px;
+}
+.steps li::marker {
+  color: var(--coral);
+  font-family: var(--signal);
+  font-weight: 700;
+}
+
+.pres {
+  margin: 0;
+  line-height: 1.55;
+  font-style: italic;
+  color: var(--muted);
+  background: var(--panel);
+  border-left: 3px solid var(--camel);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  padding: 12px 16px;
+}
+
+.usedby {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

@@ -1,0 +1,33 @@
+/* JP designprofil — sentrale variabler.
+   Fargene og fontene er hentet fra originalen (merkevare-DNA).
+   Bytt --signal / --body ved fontlisens (Signal / Maison Neue). */
+:root {
+  /* Farger */
+  --bg: #f5f5ea; /* kremhvit bakgrunn */
+  --panel: #ffffff; /* kort/flater */
+  --ink: #1d1813; /* tekst */
+  --muted: #897b68; /* dempet tekst */
+  --faint: #b6a98f; /* svak tekst */
+  --line: #e7e1d0; /* streker/kanter */
+  --coral: #da2a1c; /* JP-rød (primær aksent) */
+  --coral-deep: #b51f14;
+  --camel: #cda177; /* brun støttefarge */
+  --green: #708573; /* grønn støttefarge */
+  --green-deep: #5f7a63;
+  --safe-bg: #eaf0ea; /* «trygt»/glutenfri bakgrunn */
+  --block-bg: #f7e6e3; /* «obs»/allergen bakgrunn */
+  --warn-bg: #f6ead2; /* «uavklart»/til-avklaring bakgrunn (amber) */
+  --warn-ink: #8a6a2f; /* uavklart tekst */
+  --warn-line: #e6d3a8; /* uavklart kant */
+
+  /* Runding og skygge */
+  --r: 14px;
+  --r-sm: 10px;
+  --pill: 999px;
+  --shadow: 0 1px 2px rgba(29, 24, 19, 0.04), 0 6px 16px rgba(29, 24, 19, 0.06);
+  --shadow-hover: 0 2px 6px rgba(29, 24, 19, 0.07), 0 14px 30px rgba(29, 24, 19, 0.13);
+
+  /* Typografi */
+  --signal: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}

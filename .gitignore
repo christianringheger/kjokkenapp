@@ -1,0 +1,9 @@
+node_modules
+dist
+.DS_Store
+
+# Kilde-PDF-er: interne, hostes på SharePoint – ikke publiser i repoet
+Underlag/
+
+# Lokale Claude Code-innstillinger (maskin-spesifikke)
+.claude/settings.local.json
