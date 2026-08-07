@@ -1,0 +1,17 @@
+rules_version = '2';
+
+// Offentlig lesing (kjøkkenstab uten innlogging).
+// Skriving kun for admin (må matche ADMIN_EMAILS i appen + storage.rules).
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email in ['christianringheger@gmail.com'];
+    }
+
+    match /dishes/{id}     { allow read: if true; allow write: if isAdmin(); }
+    match /recipes/{id}    { allow read: if true; allow write: if isAdmin(); }
+    match /prepitems/{id}  { allow read: if true; allow write: if isAdmin(); }
+  }
+}

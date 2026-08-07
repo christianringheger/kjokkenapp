@@ -1,0 +1,19 @@
+rules_version = '2';
+
+// Bilder: offentlig lesing, admin kan laste opp (bilder, maks 25 MB).
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email in ['christianringheger@gmail.com'];
+    }
+
+    match /media/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin()
+        && request.resource.size < 25 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+  }
+}
