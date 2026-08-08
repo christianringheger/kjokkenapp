@@ -30,8 +30,34 @@
         add("link", { rel: "manifest", href: "./manifest.webmanifest" });
         add("link", { rel: "apple-touch-icon", href: "./icon-180.png" });
         if ("serviceWorker" in navigator) {
+          // Auto-oppdatering: når en ny service worker tar over, last appen på
+          // nytt én gang (men ikke ved aller første installasjon).
+          var hadController = !!navigator.serviceWorker.controller;
+          var refreshing = false;
+          navigator.serviceWorker.addEventListener("controllerchange", function () {
+            if (refreshing || !hadController) return;
+            refreshing = true;
+            window.location.reload();
+          });
+          var checkUpdate = function () {
+            navigator.serviceWorker
+              .getRegistration()
+              .then(function (reg) {
+                if (reg) reg.update();
+              })
+              .catch(function () {});
+          };
           window.addEventListener("load", function () {
-            navigator.serviceWorker.register("./sw.js").catch(function () {});
+            navigator.serviceWorker
+              .register("./sw.js")
+              .then(function (reg) {
+                if (reg) reg.update();
+              })
+              .catch(function () {});
+          });
+          // Sjekk etter ny versjon når appen kommer i forgrunnen igjen.
+          document.addEventListener("visibilitychange", function () {
+            if (!document.hidden) checkUpdate();
           });
         }
       })();

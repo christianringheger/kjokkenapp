@@ -1,5 +1,5 @@
 // Service worker for offline-bruk. Bump CACHE-versjonen ved ny app-versjon.
-const CACHE = "jp-kjokken-v2";
+const CACHE = "jp-kjokken-v3";
 const CORE = [
   "./",
   "./index.html",
@@ -33,10 +33,12 @@ self.addEventListener("fetch", (e) => {
   const req = e.request;
   if (req.method !== "GET") return;
 
-  // Appen (HTML): nett først → fersk versjon når online, cache når offline.
+  // Appen (HTML): nett først, ALLTID ferskt (forbi HTTP-cache) → nyeste versjon
+  // når online, cache når offline. `no-store` hindrer at GitHub Pages sin
+  // HTTP-cache serverer en gammel index.html etter deploy.
   if (req.mode === "navigate") {
     e.respondWith(
-      fetch(req)
+      fetch(req, { cache: "no-store" })
         .then((r) => {
           const cp = r.clone();
           caches.open(CACHE).then((c) => c.put("./index.html", cp));
