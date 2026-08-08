@@ -26,24 +26,18 @@ Mål: **Firestore som fasit**, admin logger inn og redigerer i appen (live uten 
 **Prosjekt:** `jordbaerpikene-kjokken`. **Admin:** `christianringheger@gmail.com`. Klient-config ligger i `src/lib/firebase.js` (trygt i repo). Reglene: `firestore.rules` + `storage.rules` (publisert i konsollet: offentlig lesing, admin-skriving).
 
 **Gjort:**
-- `src/lib/firebase.js` — lat init (Firebase starter kun på `#/admin`), `isAdmin()`, `importSeedToFirestore()`.
+- `src/lib/firebase.js` — lat init, `isAdmin()`, `importSeedToFirestore()`.
 - `src/ui/admin.js` — `#/admin`: innlogging (e-post/passord) + adminpanel med «Importer til Firestore»-knapp. Diskré «Admin»-lenke nederst på forsiden.
+- ✅ **Import kjørt og verifisert** (84 dishes / 34 recipes / 87 prepitems i Firestore; media på d0/d1/d2 bevart, allergener = ny seed).
+- ✅ **Import-blokker fikset:** `usedBy` på oppskrifter var array-av-arrays (Firestore avviser nøstede arrays) → endret til Firestore-native `[{id, title}]` i `seed.json` + `src/ui/detail.js`.
+- ✅ **Appen leser fra Firestore** (Spor 2 steg 2): nytt `src/lib/data.js` (`loadData()` leser dishes/recipes/prepitems `orderBy('_ord')`, faller tilbake til `seed.json` ved feil/offline eller tom samling). `src/main.js` er nå async (viser «Laster…», henter data, bygger oppslag/indeks, tegner). Kilde logges: `[data] Firestore: …`.
 
-**Firestore-tilstand (viktig kontekst):** databasen hadde gammel data fra original-appen — 84 `dishes` (gammel allergendata) der 3 retter (`d0`, `d1`, `d2`) hadde ekte bilde (Firebase Storage) + Vimeo-video, men `recipes` og `prepitems` var TOMME. De 3 mediene er reddet inn i `seed.json` (så `seed.json` er nå komplett fasit). Importen overskriver de 84 rettene med vår data (mediene beholdt) og legger til 34 oppskrifter + 87 prep.
+**Firestore-tilstand:** Firestore er nå fasit (84/34/87). `seed.json` er fortsatt komplett og fungerer som offline-fallback. Importen overskriver dishes (`set` uten merge) og legger til recipes/prepitems; media beholdes fordi `seed.json` allerede inneholder image/video på d0/d1/d2.
 
 **NESTE STEG (i rekkefølge):**
-1. **Sjekk om importen er kjørt.** Admin skulle logge inn på `#/admin` og trykke «Importer til Firestore» én gang. Verifiser via offentlig REST-lesing (ingen innlogging):
-   ```bash
-   KEY="AIzaSyCSLtKx1jOz8m7oshob0BbxqeBsBDMiuGU"
-   BASE="https://firestore.googleapis.com/v1/projects/jordbaerpikene-kjokken/databases/(default)/documents"
-   for c in dishes recipes prepitems; do
-     n=$(curl -s "$BASE/$c?key=$KEY&pageSize=300" | python3 -c "import sys,json;print(len(json.load(sys.stdin).get('documents',[])))")
-     echo "$c: $n"
-   done
-   ```
-   Er `recipes`/`prepitems` > 0 er importen kjørt. Er de 0, be admin kjøre importen på `#/admin`.
-2. **Koble appen til å lese fra Firestore** (source of truth) med `seed.json` som offline-fallback. `src/main.js` må bli async: last `dishes`/`recipes`/`prepitems` fra Firestore (`orderBy('_ord')`), fall tilbake til bundlet `seed.json` ved feil/offline. Vurder Firestore offline-persistence (`persistentLocalCache`). Behold PWA/offline-oppførselen.
-3. **Admin-editor:** rediger felt (navn, pris, allergener, komponenter, `build`-steg, `video`-URL osv.) og lagre til Firestore. Reorder via `_ord`. Kun synlig for admin.
+1. ✅ Import kjørt (se over).
+2. ✅ Appen leser fra Firestore med seed-fallback (se over).
+3. **Admin-editor (NÅ):** rediger felt (navn, pris, allergener, komponenter, `build`-steg, `video`-URL osv.) og lagre til Firestore. Reorder via `_ord`. Kun synlig for admin. Merk: appen leser i dag data ved oppstart (`loadData()`) — vurder å re-laste/oppdatere visningen etter lagring.
 4. **Bildeopplasting:** Firebase Storage (`media/`-path, admin write, bilder <25 MB). Koble til medieblokken/editoren (`item.image`).
 
 ## 6. Åpne punkter / advarsler

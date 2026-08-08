@@ -6911,18 +6911,18 @@
       "cat": "grønt",
       "id": "r1",
       "usedBy": [
-        [
-          "d7",
-          "Blomkålsuppe"
-        ],
-        [
-          "d8",
-          "Spansk Omelett"
-        ],
-        [
-          "d12",
-          "Lasagne"
-        ]
+        {
+          "id": "d7",
+          "title": "Blomkålsuppe"
+        },
+        {
+          "id": "d8",
+          "title": "Spansk Omelett"
+        },
+        {
+          "id": "d12",
+          "title": "Lasagne"
+        }
       ],
       "src": {
         "pdf": "JP_Produksjonsmanual_Sommer_2026.pdf",
@@ -6961,10 +6961,10 @@
       "cat": "grønt",
       "id": "r2",
       "usedBy": [
-        [
-          "d0",
-          "Bakt Tomat- og Fetasalat"
-        ]
+        {
+          "id": "d0",
+          "title": "Bakt Tomat- og Fetasalat"
+        }
       ],
       "src": {
         "pdf": "JP_Produksjonsmanual_Sommer_2026.pdf",
@@ -7012,10 +7012,10 @@
       "cat": "grønt",
       "id": "r3",
       "usedBy": [
-        [
-          "d0",
-          "Bakt Tomat- og Fetasalat"
-        ]
+        {
+          "id": "d0",
+          "title": "Bakt Tomat- og Fetasalat"
+        }
       ],
       "src": {
         "pdf": "JP_Produksjonsmanual_Sommer_2026.pdf",
@@ -7086,14 +7086,14 @@
       "cat": "grønt",
       "id": "r5",
       "usedBy": [
-        [
-          "d0",
-          "Bakt Tomat- og Fetasalat"
-        ],
-        [
-          "d3",
-          "Rødbeteburger med Fries"
-        ]
+        {
+          "id": "d0",
+          "title": "Bakt Tomat- og Fetasalat"
+        },
+        {
+          "id": "d3",
+          "title": "Rødbeteburger med Fries"
+        }
       ],
       "src": {
         "pdf": "JP_Produksjonsmanual_Sommer_2026.pdf",
@@ -7198,18 +7198,18 @@
       "cat": "grønt",
       "id": "r7",
       "usedBy": [
-        [
-          "d5",
-          "BBQ med Fries"
-        ],
-        [
-          "d19",
-          "Bakt Potet med Ost"
-        ],
-        [
-          "d20",
-          "Bakt Potet med Bacon"
-        ]
+        {
+          "id": "d5",
+          "title": "BBQ med Fries"
+        },
+        {
+          "id": "d19",
+          "title": "Bakt Potet med Ost"
+        },
+        {
+          "id": "d20",
+          "title": "Bakt Potet med Bacon"
+        }
       ],
       "src": {
         "pdf": "JP_Produksjonsmanual_Sommer_2026.pdf",
@@ -7295,10 +7295,10 @@
       "cat": "brod",
       "id": "r9",
       "usedBy": [
-        [
-          "d13",
-          "Club Sandwich med Fries"
-        ]
+        {
+          "id": "d13",
+          "title": "Club Sandwich med Fries"
+        }
       ],
       "src": {
         "pdf": "JP_Produksjonsmanual_Sommer_2026.pdf",
@@ -7347,18 +7347,18 @@
       "cat": "brod",
       "id": "r10",
       "usedBy": [
-        [
-          "d0",
-          "Bakt Tomat- og Fetasalat"
-        ],
-        [
-          "d1",
-          "Vår Cæsarsalat"
-        ],
-        [
-          "d2",
-          "Kylling- og Baconsalat"
-        ]
+        {
+          "id": "d0",
+          "title": "Bakt Tomat- og Fetasalat"
+        },
+        {
+          "id": "d1",
+          "title": "Vår Cæsarsalat"
+        },
+        {
+          "id": "d2",
+          "title": "Kylling- og Baconsalat"
+        }
       ],
       "src": {
         "pdf": "JP_Produksjonsmanual_Sommer_2026.pdf",
@@ -7413,10 +7413,10 @@
       "cat": "brod",
       "id": "r11",
       "usedBy": [
-        [
-          "d71",
-          "Grillet ostesmørbrød"
-        ]
+        {
+          "id": "d71",
+          "title": "Grillet ostesmørbrød"
+        }
       ],
       "src": {
         "pdf": "JP_Produksjonsmanual_Sommer_2026.pdf",
@@ -7469,58 +7469,58 @@
       "cat": "brod",
       "id": "r12",
       "usedBy": [
-        [
-          "d0",
-          "Bakt Tomat- og Fetasalat"
-        ],
-        [
-          "d1",
-          "Vår Cæsarsalat"
-        ],
-        [
-          "d2",
-          "Kylling- og Baconsalat"
-        ],
-        [
-          "d7",
-          "Blomkålsuppe"
-        ],
-        [
-          "d8",
-          "Spansk Omelett"
-        ],
-        [
-          "d9",
-          "Kremet Pasta med Kylling"
-        ],
-        [
-          "d12",
-          "Lasagne"
-        ],
-        [
-          "d14",
-          "Klassisk Fransk Oksegryte"
-        ],
-        [
-          "d17",
-          "Kremet Pasta"
-        ],
-        [
-          "p24",
-          "Focaccia Med Kylling Og Bacon"
-        ],
-        [
-          "p25",
-          "Focaccia Med Ost Og Skinke"
-        ],
-        [
-          "p26",
-          "Focaccia Med Reker"
-        ],
-        [
-          "d65",
-          "Focaccia"
-        ]
+        {
+          "id": "d0",
+          "title": "Bakt Tomat- og Fetasalat"
+        },
+        {
+          "id": "d1",
+          "title": "Vår Cæsarsalat"
+        },
+        {
+          "id": "d2",
+          "title": "Kylling- og Baconsalat"
+        },
+        {
+          "id": "d7",
+          "title": "Blomkålsuppe"
+        },
+        {
+          "id": "d8",
+          "title": "Spansk Omelett"
+        },
+        {
+          "id": "d9",
+          "title": "Kremet Pasta med Kylling"
+        },
+        {
+          "id": "d12",
+          "title": "Lasagne"
+        },
+        {
+          "id": "d14",
+          "title": "Klassisk Fransk Oksegryte"
+        },
+        {
+          "id": "d17",
+          "title": "Kremet Pasta"
+        },
+        {
+          "id": "p24",
+          "title": "Focaccia Med Kylling Og Bacon"
+        },
+        {
+          "id": "p25",
+          "title": "Focaccia Med Ost Og Skinke"
+        },
+        {
+          "id": "p26",
+          "title": "Focaccia Med Reker"
+        },
+        {
+          "id": "d65",
+          "title": "Focaccia"
+        }
       ],
       "src": {
         "pdf": "JP_Produksjonsmanual_Sommer_2026.pdf",
@@ -7557,10 +7557,10 @@
       "cat": "brod",
       "id": "r13",
       "usedBy": [
-        [
-          "d10",
-          "Bruschetta med Mozzarella"
-        ]
+        {
+          "id": "d10",
+          "title": "Bruschetta med Mozzarella"
+        }
       ],
       "src": {
         "pdf": "JP_Produksjonsmanual_Sommer_2026.pdf",
@@ -7606,14 +7606,14 @@
       "cat": "prepp",
       "id": "r14",
       "usedBy": [
-        [
-          "d15",
-          "Pannekaker med Rørte Jordbær"
-        ],
-        [
-          "d25",
-          "Milkshakes"
-        ]
+        {
+          "id": "d15",
+          "title": "Pannekaker med Rørte Jordbær"
+        },
+        {
+          "id": "d25",
+          "title": "Milkshakes"
+        }
       ],
       "src": {
         "pdf": "JP_Produksjonsmanual_Sommer_2026.pdf",
@@ -7740,10 +7740,10 @@
       "cat": "prepp",
       "id": "r16",
       "usedBy": [
-        [
-          "d8",
-          "Spansk Omelett"
-        ]
+        {
+          "id": "d8",
+          "title": "Spansk Omelett"
+        }
       ],
       "src": {
         "pdf": "JP_Produksjonsmanual_Sommer_2026.pdf",
@@ -7780,10 +7780,10 @@
       "cat": "prepp",
       "id": "r17",
       "usedBy": [
-        [
-          "d12",
-          "Lasagne"
-        ]
+        {
+          "id": "d12",
+          "title": "Lasagne"
+        }
       ],
       "src": {
         "pdf": "JP_Produksjonsmanual_Sommer_2026.pdf",
@@ -7840,10 +7840,10 @@
       "cat": "prepp",
       "id": "r18",
       "usedBy": [
-        [
-          "d70",
-          "Chiapudding"
-        ]
+        {
+          "id": "d70",
+          "title": "Chiapudding"
+        }
       ],
       "src": {
         "pdf": "JP_Produksjonsmanual_Sommer_2026.pdf",
@@ -7898,10 +7898,10 @@
       "cat": "grønt",
       "id": "r19",
       "usedBy": [
-        [
-          "d7",
-          "Blomkålsuppe"
-        ]
+        {
+          "id": "d7",
+          "title": "Blomkålsuppe"
+        }
       ],
       "src": {
         "pdf": "JP_Produksjonsmanual_Sommer_2026.pdf",
@@ -7951,34 +7951,34 @@
       "cat": "prepp",
       "id": "r20",
       "usedBy": [
-        [
-          "d9",
-          "Kremet Pasta med Kylling"
-        ],
-        [
-          "d10",
-          "Bruschetta med Mozzarella"
-        ],
-        [
-          "d13",
-          "Club Sandwich med Fries"
-        ],
-        [
-          "d17",
-          "Kremet Pasta"
-        ],
-        [
-          "d19",
-          "Bakt Potet med Ost"
-        ],
-        [
-          "d20",
-          "Bakt Potet med Bacon"
-        ],
-        [
-          "d24",
-          "Urtestekt Brød med Aioli"
-        ]
+        {
+          "id": "d9",
+          "title": "Kremet Pasta med Kylling"
+        },
+        {
+          "id": "d10",
+          "title": "Bruschetta med Mozzarella"
+        },
+        {
+          "id": "d13",
+          "title": "Club Sandwich med Fries"
+        },
+        {
+          "id": "d17",
+          "title": "Kremet Pasta"
+        },
+        {
+          "id": "d19",
+          "title": "Bakt Potet med Ost"
+        },
+        {
+          "id": "d20",
+          "title": "Bakt Potet med Bacon"
+        },
+        {
+          "id": "d24",
+          "title": "Urtestekt Brød med Aioli"
+        }
       ],
       "src": {
         "pdf": "JP_Produksjonsmanual_Sommer_2026.pdf",

@@ -123,7 +123,7 @@ export function renderRecipeDetail(r) {
     ? section(
         "Brukes i",
         `<ul class="usedby">${r.usedBy
-          .map(([id, name]) => `<li><a class="rlink" href="#/dish/${esc(id)}">${esc(name)}</a></li>`)
+          .map(({ id, title }) => `<li><a class="rlink" href="#/dish/${esc(id)}">${esc(title)}</a></li>`)
           .join("")}</ul>`
       )
     : "";

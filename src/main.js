@@ -1,10 +1,10 @@
 // Inngangspunkt + enkel ruter.
-// Data lastes lokalt fra seed.json. Firebase kobles på senere.
+// Data leses fra Firestore (fasit) med seed.json som offline-fallback — se lib/data.js.
 import "./styles/tokens.css";
 import "./styles/base.css";
 import "./styles/components.css";
 import "./styles/detail.css";
-import seed from "./data/seed.json";
+import { loadData } from "./lib/data.js";
 import { renderDishesShell, renderDishResults } from "./ui/dishes.js";
 import { renderDishDetail, renderRecipeDetail } from "./ui/detail.js";
 import {
@@ -33,9 +33,11 @@ import {
 
 const app = document.querySelector("#app");
 
-// Oppslagstabeller for rask henting på id.
-const dishById = Object.fromEntries(seed.dishes.map((d) => [d.id, d]));
-const recipeById = Object.fromEntries(seed.recipes.map((r) => [r.id, r]));
+// Data + avledede oppslag/indeks — fylles i bootstrap() når loadData() er ferdig.
+let data = { dishes: [], recipes: [], prepitems: [] };
+let dishById = {};
+let recipeById = {};
+let ravIndex = {};
 
 // Filter-tilstand som huskes når man går fram og tilbake.
 // `avoid` er allergener som skjules; `alOpen` husker om filterraden står åpen.
@@ -47,8 +49,7 @@ const listState = {
   groupBy: "cat", // "cat" | "station"
 };
 
-// Råvare-indeks: bygges én gang; `rq` husker søket i råvarevisningen.
-const ravIndex = buildRavareIndex(seed);
+// `rq` husker søket i råvarevisningen.
 const ravState = { rq: "" };
 
 // Handleliste: valgte retter/oppskrifter (lagres lokalt) + søketekst.
@@ -70,7 +71,7 @@ function renderList() {
   gf.checked = listState.gfOnly;
 
   const update = () => {
-    results.innerHTML = renderDishResults(seed.dishes, seed.recipes, listState);
+    results.innerHTML = renderDishResults(data.dishes, data.recipes, listState);
   };
   search.addEventListener("input", () => {
     listState.q = search.value;
@@ -148,8 +149,8 @@ function renderHandle() {
   const paintMatches = () => {
     matchEl.innerHTML = renderHandleMatches(
       handleState.q,
-      seed.dishes,
-      seed.recipes,
+      data.dishes,
+      data.recipes,
       handleState.items
     );
   };
@@ -213,7 +214,7 @@ function renderPrep() {
   const filterRow = document.querySelector(".prep-filter-row");
 
   const update = () => {
-    results.innerHTML = renderPrepResults(seed.prepitems, prepState);
+    results.innerHTML = renderPrepResults(data.prepitems, prepState);
   };
 
   // Bytt dagsfilter.
@@ -294,6 +295,22 @@ function render() {
   }
 }
 
-initMedia();
-window.addEventListener("hashchange", render);
-render();
+// Bygg oppslag/indeks fra lastet data.
+function indexData() {
+  dishById = Object.fromEntries(data.dishes.map((d) => [d.id, d]));
+  recipeById = Object.fromEntries(data.recipes.map((r) => [r.id, r]));
+  ravIndex = buildRavareIndex(data);
+}
+
+// Oppstart: vis skjelett med en gang, last data (Firestore → seed-fallback),
+// og tegn så den valgte skjermen. Ruteren fungerer under lasting.
+async function bootstrap() {
+  initMedia();
+  window.addEventListener("hashchange", render);
+  app.innerHTML = `<main class="wrap"><p class="lead">Laster…</p></main>`;
+  data = await loadData();
+  indexData();
+  render();
+}
+
+bootstrap();
