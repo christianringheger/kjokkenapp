@@ -555,11 +555,16 @@ body.lb-open {
 .badge-gf .check {
   font-size: 10px;
 }
+/* «Ny!» / «Bestselger!» som på bordmenyen: Maison Neue Bold kursiv, rød tekst. */
 .badge-tag {
-  background: var(--coral);
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  background: transparent;
+  padding: 2px 0;
+  color: var(--coral);
+  font-family: var(--body);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 13.5px;
+  letter-spacing: 0;
 }
 .badge-review {
   background: var(--warn-bg);

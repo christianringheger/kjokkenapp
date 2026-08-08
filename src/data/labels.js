@@ -36,8 +36,8 @@ export const ALLERGEN_NAME = {
   blotdyr: "Bløtdyr",
 };
 
-// Tags (dish.tag)
+// Tags (dish.tag) — matcher bordmenyen: «Ny!» / «Bestselger!»
 export const TAG_NAME = {
-  ny: "Ny",
-  bestselger: "Bestselger",
+  ny: "Ny!",
+  bestselger: "Bestselger!",
 };
