@@ -39,8 +39,8 @@ Intern kjøkkenmanual for Jordbærpikene (JP): meny, oppskrifter, allergener, pr
 
 ## Designprofil (JP)
 - Farger: JP-rød `#da2a1c`, kremhvit `#f5f5ea`, sort; støtte brun `#cda177`, grønn `#708573`. Varselfarge (uavklart) amber `#f6ead2`. Definert i `tokens.css`.
-- Typografi: display/«Signal»-rolle = Archivo (caps + sperret tracking); brødtekst = Hanken Grotesk. (Stand-ins for lisensierte Signal/Maison Neue — bytt ved fontlisens via `--signal`/`--body`.)
-- Jordbær-stempel ved navnetrekket. Responsivt: 2 kolonner mobil / 3 iPad+desktop. Safe-area håndtert.
+- Typografi: display/«Signal»-rolle = **Signal** (URW, caps + sperret tracking); brødtekst = **Maison Neue** (Book/Medium/Bold). Lisensierte profilfonter, bygget inn som base64 i `src/styles/fonts.css`. Archivo/Hanken Grotesk beholdt som fallback i `--signal`/`--body` (`tokens.css`). Ingen ekstern fontlasting.
+- Offisiell JP-jordbærlogo (fra designprofilen) ved navnetrekket, se `berry()` i `nav.js` (silhuett + 5 frø, farges via `currentColor`). PWA/hjem-skjerm-ikonet (`public/icon-*.png`) er hvit jordbær på JP-rød bunn. Responsivt: 2 kolonner mobil / 3 iPad+desktop. Safe-area håndtert.
 
 ## Konvensjoner
 - Norsk UI. Behold den modulære src-strukturen; ikke slå alt sammen til én fil igjen (bygget gjør det).
