@@ -1,5 +1,6 @@
 // Inngangspunkt + enkel ruter.
 // Data leses fra Firestore (fasit) med seed.json som offline-fallback — se lib/data.js.
+import "./styles/fonts.css";
 import "./styles/tokens.css";
 import "./styles/base.css";
 import "./styles/components.css";
