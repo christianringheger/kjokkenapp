@@ -10,6 +10,7 @@ import {
   signOut,
   importSeedToFirestore,
 } from "../lib/firebase.js";
+import { renderEditorPanel } from "./editor.js";
 
 function mapErr(e) {
   const c = (e && e.code) || "";
@@ -66,11 +67,15 @@ export function renderAdmin(container) {
       ${
         admin
           ? `<section class="dsec">
-              <h2 class="dsec-title">Importer data til Firestore</h2>
-              <p>Skriver den innebygde menyen (retter, oppskrifter, prep) til Firestore. Overskriver eksisterende retter; legger til oppskrifter og prep. Kjør én gang.</p>
+              <h2 class="dsec-title">Rediger innhold</h2>
+              <div id="editorPanel"></div>
+            </section>
+            <details class="dsec admin-import">
+              <summary class="dsec-title">Importer data til Firestore</summary>
+              <p>Skriver den innebygde menyen (retter, oppskrifter, prep) til Firestore. Overskriver eksisterende retter; legger til oppskrifter og prep. Kjør kun ved behov.</p>
               <button id="importBtn" class="admin-btn">Importer til Firestore</button>
               <pre id="importLog" class="admin-log" hidden></pre>
-            </section>`
+            </details>`
           : `<p class="admin-err">Denne kontoen har ikke admin-tilgang.</p>`
       }
       <button id="logoutBtn" class="admin-btn admin-btn-ghost">Logg ut</button>`;
@@ -78,6 +83,8 @@ export function renderAdmin(container) {
     body.querySelector("#logoutBtn").addEventListener("click", () => signOut(auth));
 
     if (admin) {
+      renderEditorPanel(body.querySelector("#editorPanel"));
+
       const btn = body.querySelector("#importBtn");
       const log = body.querySelector("#importLog");
       btn.addEventListener("click", async () => {
