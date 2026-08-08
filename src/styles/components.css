@@ -52,26 +52,12 @@
   flex-direction: row;
 }
 
-/* Jordbær-stempel */
+/* Offisielt JP-jordbær (silhuett, farges via currentColor) */
 .berry {
-  width: 26px;
-  height: 26px;
+  width: auto;
+  height: 30px;
   flex: none;
-}
-.berry-body {
-  fill: var(--coral);
-}
-.berry-leaf-fill {
-  fill: var(--green);
-}
-.berry-leaf {
-  stroke: var(--green);
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  fill: none;
-}
-.berry-seeds {
-  fill: rgba(245, 245, 234, 0.85);
+  color: var(--coral);
 }
 
 /* Faner */
@@ -117,8 +103,8 @@
     gap: 8px;
   }
   .berry {
-    width: 22px;
-    height: 22px;
+    width: auto;
+    height: 26px;
   }
   .brand-name {
     font-size: 15px;
