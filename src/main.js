@@ -23,6 +23,7 @@ import { renderGuide } from "./ui/guide.js";
 import { renderArkiv } from "./ui/arkiv.js";
 import { renderForside } from "./ui/forside.js";
 import { initMedia } from "./lib/media.js";
+import { initChecklist } from "./lib/checklist.js";
 import { renderAdmin } from "./ui/admin.js";
 import {
   renderHandleShell,
@@ -307,6 +308,7 @@ function indexData() {
 // og tegn så den valgte skjermen. Ruteren fungerer under lasting.
 async function bootstrap() {
   initMedia();
+  initChecklist();
   window.addEventListener("hashchange", render);
   app.innerHTML = `<main class="wrap"><p class="lead">Laster…</p></main>`;
   data = await loadData();

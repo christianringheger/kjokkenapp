@@ -23,6 +23,21 @@ function stepsList(steps = []) {
     .join("")}</ol>`;
 }
 
+const CHECK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 6.5"/></svg>`;
+
+// Fremgangsmåte som avkryssbar sjekkliste + «Nullstill». Avkryssing er
+// midlertidig (nullstilles ved nullstill-knapp eller når man forlater siden).
+function checklist(steps = []) {
+  if (!steps.length) return "";
+  const items = steps
+    .map(
+      (s) =>
+        `<li data-ck><span class="ck-box">${CHECK}</span><span class="ck-tx">${esc(s)}</span></li>`
+    )
+    .join("");
+  return `<ol class="steps steps-check">${items}</ol><button type="button" class="ckreset" data-ckreset>Nullstill sjekkliste</button>`;
+}
+
 /* ---------- RETT ---------- */
 export function renderDishDetail(d) {
   if (!d) return notFound("Fant ikke retten.");
@@ -54,7 +69,7 @@ export function renderDishDetail(d) {
       )
     : "";
   const buildSteps = (b.steps || []).length
-    ? section("Fremgangsmåte", stepsList(b.steps))
+    ? section("Fremgangsmåte", checklist(b.steps))
     : "";
   const layers = (b.layers || []).length
     ? section("Lagdeling", stepsList(b.layers))
@@ -116,7 +131,7 @@ export function renderRecipeDetail(r) {
       )
     : "";
   const steps = (r.steps || []).length
-    ? section("Fremgangsmåte", stepsList(r.steps))
+    ? section("Fremgangsmåte", checklist(r.steps))
     : "";
 
   const usedBy = (r.usedBy || []).length
