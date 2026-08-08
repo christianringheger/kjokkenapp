@@ -5,6 +5,8 @@ import { esc } from "../lib/dom.js";
 import { CATEGORIES, ALLERGEN_NAME, TAG_NAME } from "../data/labels.js";
 import { fetchList, fetchDoc, saveDoc } from "../lib/firestore-admin.js";
 import { cleanForSave } from "../lib/editor-serialize.js";
+import { uploadImage } from "../lib/storage-admin.js";
+import { validateImageFile } from "../lib/upload-validate.js";
 
 export { cleanForSave };
 
@@ -68,6 +70,24 @@ function fDatalist(path, label, val, values, listId) {
   return `<label class="ed-field"><span class="ed-lbl">${esc(label)}</span>
     <input class="ed-input" ${idAttr(path)} list="${listId}" value="${esc(val ?? "")}" />
     <datalist id="${listId}">${opts}</datalist></label>`;
+}
+
+// Bilde-felt: forhåndsvisning + opplasting (Firebase Storage) + redigerbar URL.
+function imageField(val) {
+  const preview = val
+    ? `<div class="ed-imgprev"><img src="${esc(val)}" alt="" /></div>`
+    : `<div class="ed-imgprev ed-imgprev-empty">Ingen bilde</div>`;
+  return `<fieldset class="ed-list ed-imgfield"><legend>Bilde</legend>
+    ${preview}
+    <div class="ed-imgrow">
+      <input type="file" accept="image/*" class="ed-file" data-upload="image" />
+      ${val ? `<button type="button" class="ed-imgrm" data-action="rmimg">Fjern bilde</button>` : ""}
+    </div>
+    <label class="ed-field"><span class="ed-lbl">Bilde-URL</span>
+      <input class="ed-input" data-path="image" value="${esc(val ?? "")}" /></label>
+    <p class="ed-imgstatus" id="edImgStatus"></p>
+    <p class="ed-hint">Maks 25 MB. Bildet lastes opp til Firebase Storage; URL-en fylles inn automatisk.</p>
+  </fieldset>`;
 }
 
 // Allergen-velger: chips som toggles. `path` peker på array-feltet (all / comp.N.a).
@@ -180,10 +200,8 @@ function dishForm(d) {
     ${stringListEditor("build.layers", "Lagdeling", d.build.layers || [])}
     ${fArea("build.pres", "Servering", d.build.pres)}
     ${fText("ownprep", "Egen prep (rid)", d.ownprep)}
-    <div class="ed-grid">
-      ${fText("video", "Video-URL", d.video)}
-      ${fText("image", "Bilde-URL (opplasting kommer)", d.image)}
-    </div>`;
+    ${fText("video", "Video-URL", d.video)}
+    ${imageField(d.image)}`;
 }
 
 function recipeForm(r) {
@@ -199,10 +217,8 @@ function recipeForm(r) {
     ${fBool("freeze", "Kan fryses", r.freeze)}
     ${recipeIngEditor("ing", r.ing || [])}
     ${stringListEditor("steps", "Fremgangsmåte", r.steps || [])}
-    <div class="ed-grid">
-      ${fText("video", "Video-URL", r.video)}
-      ${fText("image", "Bilde-URL (opplasting kommer)", r.image)}
-    </div>`;
+    ${fText("video", "Video-URL", r.video)}
+    ${imageField(r.image)}`;
 }
 
 function prepForm(p) {
@@ -329,6 +345,10 @@ export function renderEditorPanel(host) {
     });
     form.addEventListener("change", (e) => {
       const el = e.target;
+      if (el.dataset.upload === "image") {
+        handleUpload(el);
+        return;
+      }
       if (el.dataset.path && (el.tagName === "SELECT" || el.type === "checkbox")) {
         const val = el.type === "checkbox" ? el.checked : el.value;
         setByPath(state.draft, el.dataset.path, val);
@@ -341,6 +361,11 @@ export function renderEditorPanel(host) {
       const btn = e.target.closest("[data-action]");
       if (!btn) return;
       const { action, path, idx, kind, key } = btn.dataset;
+      if (action === "rmimg") {
+        setByPath(state.draft, "image", "");
+        paintForm();
+        return;
+      }
       if (action === "al") {
         const arr = getByPath(state.draft, path) || [];
         const i = arr.indexOf(key);
@@ -358,6 +383,32 @@ export function renderEditorPanel(host) {
       }
       paintForm();
     });
+  }
+
+  async function handleUpload(input) {
+    const file = input.files && input.files[0];
+    if (!file) return;
+    const status = host.querySelector("#edImgStatus");
+    const preErr = validateImageFile(file);
+    if (preErr) {
+      if (status) status.textContent = preErr;
+      input.value = "";
+      return;
+    }
+    if (status) status.textContent = "Laster opp … 0 %";
+    try {
+      const url = await uploadImage(
+        `${state.col}/${state.draft._id}`,
+        file,
+        (p) => {
+          if (status) status.textContent = `Laster opp … ${p} %`;
+        }
+      );
+      setByPath(state.draft, "image", url);
+      paintForm();
+    } catch (e) {
+      if (status) status.textContent = "Opplasting feilet: " + (e.message || e);
+    }
   }
 
   async function onSave() {
