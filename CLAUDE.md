@@ -51,8 +51,10 @@ Intern kjøkkenmanual for Jordbærpikene (JP): meny, oppskrifter, allergener, pr
 - **Ikke et git-repo lokalt.** Endringene ligger foreløpig bare på denne maskinen. Normal deploy går via `kjokkenapp`-repoet på GitHub Pages.
 - `npm run build`, og publiser **hele innholdet i `dist/`** (index.html + manifest.webmanifest + sw.js + icon-*.png) til der Pages serverer fra (rot av `main`). Alle filene må ligge sammen for at PWA/offline skal virke.
 - **PWA:** appen kan «Legg til på Hjem-skjerm» på iPad (Safari → Del → Legg til på Hjem-skjerm) og fungerer offline. `sw.js` cacher app-skallet (nett-først på HTML, cache-først på øvrige). Bump `CACHE`-konstanten i `sw.js` ved større endringer for å tvinge frisk cache.
-- Ved bygge-automatisering senere: en GitHub Action som kjører `npm run build` og publiserer `dist/` (da slipper man manuell opplasting).
+- **Auto-deploy er satt opp:** `.github/workflows/deploy.yml` kjører `npm run build` og publiserer `dist/` til Pages ved hver push til `main`. Repo: `git@github.com:christianringheger/kjokkenapp.git` (SSH-nøkkel satt opp lokalt). Pages-kilden står på «GitHub Actions». Live: https://christianringheger.github.io/kjokkenapp/
+- Flyt: endre kode → `git commit` → `git push origin main` → auto-bygg og -publisering. Ingen manuell opplasting.
 
-## Utsatt / blokkert (Firebase)
-- `main.js` sier «Firebase kobles på senere». Auth (e-post/passord), admin-redigering og bilder/video ble fjernet i migreringen og kommer tilbake når backend-kontoen er åpnet.
-- Da gjelder igjen originalens regler: **`TEST_BYPASS` = `false` i prod**, og admin-e-post må matche på tre steder (`ADMIN_EMAILS` + `firestore.rules` + `storage.rules`). Nåværende admin: `christianringheger@gmail.com`. `firebaseConfig` er klient-konfig (trygt i offentlig repo; sikkerheten ligger i reglene). Se `legacy/original-index.html` for referanse.
+## Firebase (pågår — se HANDOFF.md)
+- Firebase re-integreres nå. Mål: **Firestore som fasit**, admin logger inn på `#/admin` og redigerer i appen (live uten redeploy). Offentlig lesing beholdes; login kun for admin.
+- Gjort: `src/lib/firebase.js` (lat init + `importSeedToFirestore`), `src/ui/admin.js` (innlogging + adminpanel), `firestore.rules` + `storage.rules` (publisert). Prosjekt `jordbaerpikene-kjokken`, admin `christianringheger@gmail.com`. `firebaseConfig` er klient-konfig (trygt i repo; sikkerhet ligger i reglene).
+- **Neste steg og full status: se `HANDOFF.md`.**
