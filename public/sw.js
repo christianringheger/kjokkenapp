@@ -1,5 +1,5 @@
 // Service worker for offline-bruk. Bump CACHE-versjonen ved ny app-versjon.
-const CACHE = "jp-kjokken-v1";
+const CACHE = "jp-kjokken-v2";
 const CORE = [
   "./",
   "./index.html",
