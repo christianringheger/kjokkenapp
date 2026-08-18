@@ -86,7 +86,7 @@ function imageField(val) {
     <label class="ed-field"><span class="ed-lbl">Bilde-URL</span>
       <input class="ed-input" data-path="image" value="${esc(val ?? "")}" /></label>
     <p class="ed-imgstatus" id="edImgStatus"></p>
-    <p class="ed-hint">Maks 25 MB. Bildet lastes opp til Firebase Storage; URL-en fylles inn automatisk.</p>
+    <p class="ed-hint">Last opp rett fra mobilen — store bilder krympes og komprimeres automatisk (maks ~1600 px) før opplasting, så appen holder seg lett. URL-en fylles inn automatisk.</p>
   </fieldset>`;
 }
 
