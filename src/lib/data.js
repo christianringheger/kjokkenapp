@@ -3,6 +3,7 @@
 // sortert på `_ord` slik at rekkefølgen matcher seed. Ved feil/offline
 // eller tom samling faller vi tilbake til den bundlede seed.json.
 import seed from "../data/seed.json";
+import { NEWS } from "../data/news.js";
 import { initFirebase } from "./firebase.js";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 
@@ -47,5 +48,23 @@ export async function loadData() {
       prepitems: seed.prepitems,
       source: "seed",
     };
+  }
+}
+
+// Nyheter til forsiden: Firestore-samlingen `news` (nyeste dato først), med den
+// bundlede NEWS som fallback ved feil/offline eller tom samling.
+export async function loadNews() {
+  try {
+    const { db } = initFirebase();
+    const snap = await getDocs(
+      query(collection(db, "news"), orderBy("date", "desc"))
+    );
+    const items = snap.docs.map((d) => {
+      const { _ord, ...rest } = d.data();
+      return { _id: d.id, ...rest };
+    });
+    return items.length ? items : NEWS;
+  } catch (_) {
+    return NEWS;
   }
 }

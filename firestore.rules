@@ -13,5 +13,17 @@ service cloud.firestore {
     match /dishes/{id}     { allow read: if true; allow write: if isAdmin(); }
     match /recipes/{id}    { allow read: if true; allow write: if isAdmin(); }
     match /prepitems/{id}  { allow read: if true; allow write: if isAdmin(); }
+
+    // Oppdateringer/nyheter på forsiden: offentlig lesing, admin skriver.
+    match /news/{id}       { allow read: if true; allow write: if isAdmin(); }
+
+    // «Meld feil»-innboks: hvem som helst kan opprette (kjøkkenstab uten
+    // innlogging), men bare admin kan lese/behandle. Begrenset for å unngå misbruk.
+    match /reports/{id} {
+      allow read, update, delete: if isAdmin();
+      allow create: if request.resource.data.message is string
+        && request.resource.data.message.size() > 0
+        && request.resource.data.message.size() < 2000;
+    }
   }
 }

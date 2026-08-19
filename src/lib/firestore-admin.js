@@ -10,13 +10,30 @@ import {
   doc,
   getDoc,
   setDoc,
+  addDoc,
+  deleteDoc,
 } from "firebase/firestore";
 
-// Hent hele samlingen sortert på _ord. `_id` = dokument-id (syntetisk hjelpefelt).
-export async function fetchList(col) {
+// Hent hele samlingen sortert på `field` (standard _ord). `_id` = dokument-id.
+// Merk: Firestore utelater dokumenter som mangler sorteringsfeltet.
+export async function fetchList(col, field = "_ord", dir = "asc") {
   const { db } = initFirebase();
-  const snap = await getDocs(query(collection(db, col), orderBy("_ord")));
+  const snap = await getDocs(query(collection(db, col), orderBy(field, dir)));
   return snap.docs.map((d) => ({ _id: d.id, ...d.data() }));
+}
+
+// Opprett nytt dokument med auto-id. Returnerer den nye id-en.
+export async function addDocTo(col, data) {
+  const { db } = initFirebase();
+  const { _id, ...clean } = data;
+  const refDoc = await addDoc(collection(db, col), clean);
+  return refDoc.id;
+}
+
+// Slett et dokument.
+export async function deleteDocById(col, id) {
+  const { db } = initFirebase();
+  await deleteDoc(doc(db, col, id));
 }
 
 export async function fetchDoc(col, id) {

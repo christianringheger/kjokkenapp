@@ -11,6 +11,7 @@ import {
   importSeedToFirestore,
 } from "../lib/firebase.js";
 import { renderEditorPanel } from "./editor.js";
+import { renderNewsAdmin } from "./news-admin.js";
 
 function mapErr(e) {
   const c = (e && e.code) || "";
@@ -70,6 +71,10 @@ export function renderAdmin(container) {
               <h2 class="dsec-title">Rediger innhold</h2>
               <div id="editorPanel"></div>
             </section>
+            <section class="dsec">
+              <h2 class="dsec-title">Oppdateringer (forsiden)</h2>
+              <div id="newsPanel"></div>
+            </section>
             <details class="dsec admin-import">
               <summary class="dsec-title">Importer data til Firestore</summary>
               <p>Skriver den innebygde menyen (retter, oppskrifter, prep) til Firestore. Overskriver eksisterende retter; legger til oppskrifter og prep. Kjør kun ved behov.</p>
@@ -84,6 +89,7 @@ export function renderAdmin(container) {
 
     if (admin) {
       renderEditorPanel(body.querySelector("#editorPanel"));
+      renderNewsAdmin(body.querySelector("#newsPanel"));
 
       const btn = body.querySelector("#importBtn");
       const log = body.querySelector("#importLog");

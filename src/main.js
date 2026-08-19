@@ -5,7 +5,7 @@ import "./styles/tokens.css";
 import "./styles/base.css";
 import "./styles/components.css";
 import "./styles/detail.css";
-import { loadData } from "./lib/data.js";
+import { loadData, loadNews } from "./lib/data.js";
 import { renderDishesShell, renderDishResults } from "./ui/dishes.js";
 import { renderDishDetail, renderRecipeDetail } from "./ui/detail.js";
 import {
@@ -44,6 +44,7 @@ const app = document.querySelector("#app");
 
 // Data + avledede oppslag/indeks — fylles i bootstrap() når loadData() er ferdig.
 let data = { dishes: [], recipes: [], prepitems: [] };
+let news = null; // nyheter til forsiden (Firestore, med bundlet fallback)
 let dishById = {};
 let recipeById = {};
 let ravIndex = {};
@@ -301,7 +302,7 @@ function render() {
     renderAdmin(app);
     window.scrollTo(0, 0);
   } else {
-    app.innerHTML = renderForside(buildQuickAccess());
+    app.innerHTML = renderForside(buildQuickAccess(), news);
     window.scrollTo(0, 0);
   }
 }
@@ -350,7 +351,9 @@ async function bootstrap() {
   initFavorites();
   window.addEventListener("hashchange", render);
   app.innerHTML = `<main class="wrap"><p class="lead">Laster…</p></main>`;
-  data = await loadData();
+  const [d, n] = await Promise.all([loadData(), loadNews()]);
+  data = d;
+  news = n;
   indexData();
   render();
 }

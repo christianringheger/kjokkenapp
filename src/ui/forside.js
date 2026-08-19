@@ -23,9 +23,11 @@ function newsItem(n) {
 }
 
 // Nyhetsfelt øverst på forsiden. Nyeste dato først.
-function newsBlock() {
-  if (!NEWS.length) return "";
-  const items = [...NEWS]
+// `newsItems` kommer fra Firestore (via main.js); faller tilbake til bundlet NEWS.
+function newsBlock(newsItems) {
+  const list = newsItems && newsItems.length ? newsItems : NEWS;
+  if (!list.length) return "";
+  const items = [...list]
     .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
     .map(newsItem)
     .join("");
@@ -93,11 +95,11 @@ function tile(t) {
     </a>`;
 }
 
-export function renderForside(quickAccess = "") {
+export function renderForside(quickAccess = "", newsItems = null) {
   return `
     ${homeHeader()}
     <main class="wrap">
-      ${newsBlock()}
+      ${newsBlock(newsItems)}
       ${quickAccess}
       <p class="forside-lead">Kjøkkenmanual for Jordbærpikene. Velg hva du vil se.</p>
       <div class="tiles">${TILES.map(tile).join("")}</div>
