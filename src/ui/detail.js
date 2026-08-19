@@ -1,9 +1,18 @@
 // Detaljvisning for én rett og for én oppskrift.
 import { TAG_NAME, CATEGORY_NAME } from "../data/labels.js";
-import { esc, amount } from "../lib/dom.js";
+import { esc, amount, fmtDateNo } from "../lib/dom.js";
 import { allergenChips, allergenIcons } from "../lib/allergens.js";
 import { mediaBlock } from "../lib/media.js";
+import { isFav } from "../lib/favorites.js";
 import { detailHeader } from "./nav.js";
+
+const STAR = `<svg class="star-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.4l2.7 5.4 6 .9-4.35 4.2 1.03 5.9L12 17l-5.38 2.8 1.03-5.9L3.3 9.7l6-.9z"/></svg>`;
+
+// Favoritt-stjerne. `ref` = "dish:<id>" | "recipe:<id>".
+function favBtn(ref) {
+  const on = isFav(ref);
+  return `<button type="button" class="fav-btn${on ? " on" : ""}" data-fav="${esc(ref)}" aria-pressed="${on}" aria-label="Lagre som favoritt" title="Lagre som favoritt">${STAR}</button>`;
+}
 
 // En ingrediens-/komponentlinje. Har den en rid, blir navnet en lenke til oppskriften.
 function ingredientLine(item, kind) {
@@ -11,9 +20,23 @@ function ingredientLine(item, kind) {
   const label = item.rid
     ? `<a class="rlink" href="#/recipe/${esc(item.rid)}">${name}</a>`
     : name;
-  const qty = kind === "amount" ? `<span class="qty">${amount(item)}</span>` : "";
+  const qty =
+    kind === "amount"
+      ? `<span class="qty" data-amt="${item.amt ?? ""}" data-unit="${esc(item.unit || "")}">${amount(item)}</span>`
+      : "";
   const all = allergenIcons(item.a);
   return `<li>${qty}<span class="iname">${label}</span>${all}</li>`;
+}
+
+// Skaler-kontroll for mengdelister (× antall). Gjelder mengdene i samme seksjon.
+function scaler() {
+  return `<div class="scaler" data-scaler>
+    <span class="scaler-lbl">Skaler</span>
+    <button type="button" class="scaler-btn" data-scale-step="-1" aria-label="Færre">−</button>
+    <span class="scaler-x">×</span>
+    <input class="scaler-input" type="number" min="1" step="1" value="1" data-scale-input aria-label="Antall ganger oppskrift" />
+    <button type="button" class="scaler-btn" data-scale-step="1" aria-label="Flere">+</button>
+  </div>`;
 }
 
 function stepsList(steps = []) {
@@ -65,7 +88,7 @@ export function renderDishDetail(d) {
   const buildIng = (b.ing || []).length
     ? section(
         "Oppbygging",
-        `<ul class="inglist">${b.ing.map((c) => ingredientLine(c, "amount")).join("")}</ul>`
+        `${scaler()}<ul class="inglist">${b.ing.map((c) => ingredientLine(c, "amount")).join("")}</ul>`
       )
     : "";
   const buildSteps = (b.steps || []).length
@@ -98,7 +121,7 @@ export function renderDishDetail(d) {
       <header class="detail-head">
         <div class="detail-title">
           <h1>${esc(d.name)}</h1>
-          ${price}
+          <div class="detail-title-actions">${price}${favBtn(`dish:${d.id}`)}</div>
         </div>
         ${cat}
         <div class="badges">${tag}${gf}</div>
@@ -109,6 +132,7 @@ export function renderDishDetail(d) {
       ${compSection}
       ${layers}
       ${pres}
+      ${updatedLine(d)}
     </main>`;
 }
 
@@ -127,7 +151,7 @@ export function renderRecipeDetail(r) {
   const ing = (r.ing || []).length
     ? section(
         "Ingredienser",
-        `<ul class="inglist">${r.ing.map((c) => ingredientLine(c, "amount")).join("")}</ul>`
+        `${scaler()}<ul class="inglist">${r.ing.map((c) => ingredientLine(c, "amount")).join("")}</ul>`
       )
     : "";
   const steps = (r.steps || []).length
@@ -149,18 +173,28 @@ export function renderRecipeDetail(r) {
       ${mediaBlock(r)}
       <header class="detail-head">
         <p class="detail-cat">Oppskrift</p>
-        <h1>${esc(r.title)}</h1>
+        <div class="detail-title">
+          <h1>${esc(r.title)}</h1>
+          <div class="detail-title-actions">${favBtn(`recipe:${r.id}`)}</div>
+        </div>
         ${metaHtml}
       </header>
       ${ing}
       ${steps}
       ${usedBy}
+      ${updatedLine(r)}
     </main>`;
 }
 
 /* ---------- felles ---------- */
 function section(title, body) {
   return `<section class="dsec"><h2 class="dsec-title">${esc(title)}</h2>${body}</section>`;
+}
+
+// Dempet «Sist oppdatert»-linje nederst (vises kun når `_updated` finnes).
+function updatedLine(item) {
+  const d = fmtDateNo(item && item._updated);
+  return d ? `<p class="detail-updated">Sist oppdatert ${esc(d)}</p>` : "";
 }
 
 function notFound(msg) {

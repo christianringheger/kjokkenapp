@@ -27,8 +27,10 @@ export async function fetchDoc(col, id) {
 
 // Skriv hele dokumentet (full overskriving). `data` må inneholde _ord og alle
 // felt som skal bevares. Synteitske hjelpefelt (_id) fjernes før skriving.
+// Stempler `_updated` (YYYY-MM-DD) så «Sist oppdatert» kan vises i appen.
 export async function saveDoc(col, id, data) {
   const { db } = initFirebase();
   const { _id, ...clean } = data;
+  clean._updated = new Date().toISOString().slice(0, 10);
   await setDoc(doc(db, col, id), clean);
 }

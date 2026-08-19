@@ -22,8 +22,15 @@ import {
 import { renderGuide } from "./ui/guide.js";
 import { renderArkiv } from "./ui/arkiv.js";
 import { renderForside } from "./ui/forside.js";
+import {
+  initFavorites,
+  pushRecent,
+  getFavs,
+  getRecent,
+} from "./lib/favorites.js";
 import { initMedia } from "./lib/media.js";
 import { initChecklist } from "./lib/checklist.js";
+import { initScale } from "./lib/scale.js";
 import { renderAdmin } from "./ui/admin.js";
 import {
   renderHandleShell,
@@ -267,9 +274,11 @@ function render() {
 
   if (route === "dish" && id) {
     app.innerHTML = renderDishDetail(dishById[id]);
+    if (dishById[id]) pushRecent(`dish:${id}`);
     window.scrollTo(0, 0);
   } else if (route === "recipe" && id) {
     app.innerHTML = renderRecipeDetail(recipeById[id]);
+    if (recipeById[id]) pushRecent(`recipe:${id}`);
     window.scrollTo(0, 0);
   } else if (route === "ravarer") {
     renderRavarer();
@@ -292,9 +301,37 @@ function render() {
     renderAdmin(app);
     window.scrollTo(0, 0);
   } else {
-    app.innerHTML = renderForside();
+    app.innerHTML = renderForside(buildQuickAccess());
     window.scrollTo(0, 0);
   }
+}
+
+// Bygg hurtigtilgang (favoritter + nylig) til forsiden. Løser opp id → navn.
+function resolveRef(ref) {
+  const [kind, id] = ref.split(":");
+  if (kind === "dish" && dishById[id])
+    return { href: `#/dish/${id}`, name: dishById[id].name };
+  if (kind === "recipe" && recipeById[id])
+    return { href: `#/recipe/${id}`, name: recipeById[id].title };
+  return null;
+}
+function quickRow(title, refs) {
+  const items = refs
+    .map(resolveRef)
+    .filter(Boolean)
+    .map((x) => `<a class="qa-chip" href="${x.href}">${escName(x.name)}</a>`)
+    .join("");
+  return items
+    ? `<div class="qa-row"><span class="qa-title">${title}</span><div class="qa-chips">${items}</div></div>`
+    : "";
+}
+function escName(s) {
+  return String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+}
+function buildQuickAccess() {
+  const fav = quickRow("Favoritter", getFavs());
+  const recent = quickRow("Nylig", getRecent());
+  return fav || recent ? `<div class="quickaccess">${fav}${recent}</div>` : "";
 }
 
 // Bygg oppslag/indeks fra lastet data.
@@ -309,6 +346,8 @@ function indexData() {
 async function bootstrap() {
   initMedia();
   initChecklist();
+  initScale();
+  initFavorites();
   window.addEventListener("hashchange", render);
   app.innerHTML = `<main class="wrap"><p class="lead">Laster…</p></main>`;
   data = await loadData();

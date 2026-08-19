@@ -1,14 +1,8 @@
 // Skjerm: forside – nyhetsfelt øverst + flis-grid som er hovednavet inn i appen.
-import { esc } from "../lib/dom.js";
+import { esc, fmtDateNo } from "../lib/dom.js";
 import { homeHeader } from "./nav.js";
 import { NEWS } from "../data/news.js";
 
-// Dato: "2026-08-19" → "19. aug 2026" (unngår tidssone-fella ved manuell parsing).
-const MONTHS = ["jan", "feb", "mar", "apr", "mai", "jun", "jul", "aug", "sep", "okt", "nov", "des"];
-function fmtDate(iso) {
-  const [y, m, d] = String(iso).split("-").map(Number);
-  return `${d}. ${MONTHS[m - 1] || ""} ${y}`;
-}
 const TYPE_LABEL = { nyhet: "Nyhet", endring: "Endring" };
 
 function newsItem(n) {
@@ -21,7 +15,7 @@ function newsItem(n) {
     <li class="news-item">
       <div class="news-meta">
         <span class="news-type news-type-${esc(n.type)}">${esc(TYPE_LABEL[n.type] || n.type)}</span>
-        <time class="news-date">${esc(fmtDate(n.date))}</time>
+        <time class="news-date">${esc(fmtDateNo(n.date))}</time>
       </div>
       <h3 class="news-head">${esc(n.title)}</h3>
       ${body}
@@ -99,11 +93,12 @@ function tile(t) {
     </a>`;
 }
 
-export function renderForside() {
+export function renderForside(quickAccess = "") {
   return `
     ${homeHeader()}
     <main class="wrap">
       ${newsBlock()}
+      ${quickAccess}
       <p class="forside-lead">Kjøkkenmanual for Jordbærpikene. Velg hva du vil se.</p>
       <div class="tiles">${TILES.map(tile).join("")}</div>
       <footer class="forside-foot"><a href="#/admin">Admin</a></footer>

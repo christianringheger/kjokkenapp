@@ -350,6 +350,48 @@
   font-size: 16px;
 }
 
+/* Hurtigtilgang (favoritter + nylig) på forsiden */
+.quickaccess {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 0 20px;
+}
+.qa-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.qa-title {
+  font-family: var(--signal);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  flex: none;
+}
+.qa-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.qa-chip {
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: var(--pill);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--ink);
+}
+.qa-chip:hover {
+  border-color: var(--coral);
+  color: var(--coral);
+}
+
 /* Nyhetsfelt øverst på forsiden */
 .news {
   margin: 0 0 22px;

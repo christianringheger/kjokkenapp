@@ -663,6 +663,35 @@
 .detail-title .price {
   font-size: clamp(18px, 4vw, 24px);
 }
+.detail-title-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex: none;
+}
+.fav-btn {
+  flex: none;
+  background: none;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  line-height: 0;
+  color: var(--camel);
+}
+.fav-btn.on {
+  color: var(--coral);
+}
+.star-ic {
+  width: 27px;
+  height: 27px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linejoin: round;
+}
+.fav-btn.on .star-ic {
+  fill: currentColor;
+}
 .detail-cat {
   margin: 8px 0 0;
   font-family: var(--signal);
@@ -862,6 +891,69 @@
 .ckreset:hover {
   border-color: var(--coral);
   color: var(--coral);
+}
+
+.detail-updated {
+  margin: 22px 0 0;
+  font-size: 12.5px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Porsjonsskalering */
+.scaler {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--pill);
+  background: var(--panel);
+}
+.scaler-lbl {
+  font-family: var(--signal);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.scaler-x {
+  color: var(--muted);
+  font-weight: 700;
+}
+.scaler-btn {
+  font: inherit;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--coral);
+  font-weight: 800;
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+}
+.scaler-btn:hover {
+  border-color: var(--coral);
+}
+.scaler-input {
+  width: 44px;
+  text-align: center;
+  font: inherit;
+  font-weight: 800;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: 4px 0;
+  -moz-appearance: textfield;
+}
+.scaler-input::-webkit-outer-spin-button,
+.scaler-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .pres {

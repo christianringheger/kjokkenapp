@@ -20,3 +20,11 @@ export function amount(item) {
   const u = item.unit ? ` ${esc(item.unit)}` : "";
   return a ? `${a}${u}` : "";
 }
+
+// Dato: "2026-08-19" → "19. aug 2026" (manuell parsing unngår tidssone-fella).
+const MONTHS_NO = ["jan", "feb", "mar", "apr", "mai", "jun", "jul", "aug", "sep", "okt", "nov", "des"];
+export function fmtDateNo(iso) {
+  const [y, m, d] = String(iso || "").split("-").map(Number);
+  if (!y || !m || !d) return "";
+  return `${d}. ${MONTHS_NO[m - 1] || ""} ${y}`;
+}
