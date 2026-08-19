@@ -103,10 +103,10 @@ export function renderDishDetail(d) {
         ${cat}
         <div class="badges">${tag}${gf}</div>
       </header>
-      ${allergens}
-      ${compSection}
       ${buildIng}
       ${buildSteps}
+      ${allergens}
+      ${compSection}
       ${layers}
       ${pres}
     </main>`;

@@ -1,6 +1,46 @@
-// Skjerm: forside – flis-grid som er hovednavet inn i appen.
+// Skjerm: forside – nyhetsfelt øverst + flis-grid som er hovednavet inn i appen.
 import { esc } from "../lib/dom.js";
 import { homeHeader } from "./nav.js";
+import { NEWS } from "../data/news.js";
+
+// Dato: "2026-08-19" → "19. aug 2026" (unngår tidssone-fella ved manuell parsing).
+const MONTHS = ["jan", "feb", "mar", "apr", "mai", "jun", "jul", "aug", "sep", "okt", "nov", "des"];
+function fmtDate(iso) {
+  const [y, m, d] = String(iso).split("-").map(Number);
+  return `${d}. ${MONTHS[m - 1] || ""} ${y}`;
+}
+const TYPE_LABEL = { nyhet: "Nyhet", endring: "Endring" };
+
+function newsItem(n) {
+  const body = n.points
+    ? `<ul class="news-points">${n.points.map((p) => `<li>${esc(p)}</li>`).join("")}</ul>`
+    : n.body
+      ? `<p class="news-body">${esc(n.body)}</p>`
+      : "";
+  return `
+    <li class="news-item">
+      <div class="news-meta">
+        <span class="news-type news-type-${esc(n.type)}">${esc(TYPE_LABEL[n.type] || n.type)}</span>
+        <time class="news-date">${esc(fmtDate(n.date))}</time>
+      </div>
+      <h3 class="news-head">${esc(n.title)}</h3>
+      ${body}
+    </li>`;
+}
+
+// Nyhetsfelt øverst på forsiden. Nyeste dato først.
+function newsBlock() {
+  if (!NEWS.length) return "";
+  const items = [...NEWS]
+    .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
+    .map(newsItem)
+    .join("");
+  return `
+    <section class="news" aria-label="Oppdateringer">
+      <h2 class="news-title">Oppdateringer</h2>
+      <ul class="news-list">${items}</ul>
+    </section>`;
+}
 
 const IW = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
 
@@ -63,6 +103,7 @@ export function renderForside() {
   return `
     ${homeHeader()}
     <main class="wrap">
+      ${newsBlock()}
       <p class="forside-lead">Kjøkkenmanual for Jordbærpikene. Velg hva du vil se.</p>
       <div class="tiles">${TILES.map(tile).join("")}</div>
       <footer class="forside-foot"><a href="#/admin">Admin</a></footer>
