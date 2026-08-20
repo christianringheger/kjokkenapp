@@ -9,6 +9,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   importSeedToFirestore,
+  applyMatfagligFix,
 } from "../lib/firebase.js";
 import { renderEditorPanel } from "./editor.js";
 import { renderNewsAdmin } from "./news-admin.js";
@@ -75,6 +76,12 @@ export function renderAdmin(container) {
               <h2 class="dsec-title">Oppdateringer (forsiden)</h2>
               <div id="newsPanel"></div>
             </section>
+            <section class="dsec">
+              <h2 class="dsec-title">Matfaglig-avklaring (allergener)</h2>
+              <p>Engangs: legger til <strong>egg</strong> på de tre croissant-rettene og fjerner «Allergener uavklart» på alle 7 (croissant + bagel). Målrettet og trygt — rører kun allergener/flagg, bevarer bilder m.m.</p>
+              <button id="matfagligBtn" class="admin-btn">Bruk Matfaglig-avklaringen</button>
+              <pre id="matfagligLog" class="admin-log" hidden></pre>
+            </section>
             <details class="dsec admin-import">
               <summary class="dsec-title">Importer data til Firestore</summary>
               <p>Skriver den innebygde menyen (retter, oppskrifter, prep) til Firestore. Overskriver eksisterende retter; legger til oppskrifter og prep. Kjør kun ved behov.</p>
@@ -90,6 +97,24 @@ export function renderAdmin(container) {
     if (admin) {
       renderEditorPanel(body.querySelector("#editorPanel"));
       renderNewsAdmin(body.querySelector("#newsPanel"));
+
+      const mfBtn = body.querySelector("#matfagligBtn");
+      const mfLog = body.querySelector("#matfagligLog");
+      mfBtn.addEventListener("click", async () => {
+        if (!window.confirm("Bruke Matfaglig-avklaringen på de 7 rettene?")) return;
+        mfBtn.disabled = true;
+        mfLog.hidden = false;
+        mfLog.textContent = "Oppdaterer …\n";
+        try {
+          await applyMatfagligFix((m) => {
+            mfLog.textContent += m + "\n";
+          });
+          mfLog.textContent += "✓ Ferdig.\n";
+        } catch (er) {
+          mfLog.textContent += "Feil: " + (er.message || er) + "\n";
+          mfBtn.disabled = false;
+        }
+      });
 
       const btn = body.querySelector("#importBtn");
       const log = body.querySelector("#importLog");
