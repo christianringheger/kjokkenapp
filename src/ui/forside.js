@@ -103,6 +103,6 @@ export function renderForside(quickAccess = "", newsItems = null) {
       ${quickAccess}
       <p class="forside-lead">Kjøkkenmanual for Jordbærpikene. Velg hva du vil se.</p>
       <div class="tiles">${TILES.map(tile).join("")}</div>
-      <footer class="forside-foot"><a href="#/admin">Admin</a></footer>
+      <footer class="forside-foot"><a href="#/changelog">Endringslogg</a><span class="foot-sep">·</span><a href="#/admin">Admin</a></footer>
     </main>`;
 }

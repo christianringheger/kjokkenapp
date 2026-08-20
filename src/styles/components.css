@@ -418,7 +418,7 @@
   padding: 0;
 }
 .news-item {
-  padding: 14px 16px;
+  padding: 18px 16px;
   border-bottom: 1px solid var(--line);
 }
 .news-item:last-child {
@@ -535,6 +535,11 @@
 }
 .forside-foot a:hover {
   color: var(--coral);
+}
+.foot-sep {
+  color: var(--faint);
+  margin: 0 9px;
+  font-size: 13px;
 }
 
 /* ---------- Lightbox (bilde/video fullskjerm) ---------- */

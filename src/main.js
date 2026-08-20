@@ -22,6 +22,7 @@ import {
 import { renderGuide } from "./ui/guide.js";
 import { renderArkiv } from "./ui/arkiv.js";
 import { renderForside } from "./ui/forside.js";
+import { renderChangelog } from "./ui/changelog.js";
 import {
   initFavorites,
   pushRecent,
@@ -300,6 +301,9 @@ function render() {
     renderList();
   } else if (route === "admin") {
     renderAdmin(app);
+    window.scrollTo(0, 0);
+  } else if (route === "changelog") {
+    app.innerHTML = renderChangelog();
     window.scrollTo(0, 0);
   } else {
     app.innerHTML = renderForside(buildQuickAccess(), news);
