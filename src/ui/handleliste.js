@@ -139,7 +139,6 @@ export function renderHandleShell() {
     ${appHeader("handle")}
     <main class="wrap detail">
       <header class="detail-head">
-        <p class="detail-cat">Handleliste</p>
         <h1>Handleliste</h1>
         <p class="lead">Legg til retter eller oppskrifter med antall – appen summerer alle råvarene til én liste (mise en place / innkjøp). Lagres lokalt på denne enheten.</p>
       </header>

@@ -828,9 +828,14 @@
 }
 .fav-btn {
   flex: none;
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: none;
-  padding: 2px;
+  padding: 0;
   cursor: pointer;
   line-height: 0;
   color: var(--camel);
@@ -1082,14 +1087,14 @@
 }
 .scaler-btn {
   font: inherit;
-  width: 30px;
-  height: 30px;
+  width: 42px;
+  height: 42px;
   border: 1px solid var(--line);
   border-radius: 50%;
   background: var(--bg);
   color: var(--coral);
   font-weight: 800;
-  font-size: 17px;
+  font-size: 20px;
   line-height: 1;
   cursor: pointer;
 }

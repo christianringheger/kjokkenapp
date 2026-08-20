@@ -4,6 +4,8 @@ import { esc } from "../lib/dom.js";
 import { appHeader } from "./nav.js";
 
 export const DAYS = ["Man", "Tir", "Ons", "Tor", "Fre", "Lør", "Søn"];
+// To bokstaver på dagsknappene så Tirsdag/Torsdag ikke blir tvetydige (begge «T»).
+const DAYS_SHORT = ["Ma", "Ti", "On", "To", "Fr", "Lø", "Sø"];
 const KEY = "jp_prepdays";
 
 export function loadPrepDays() {
@@ -35,7 +37,7 @@ function dayToggles(p, days) {
     (d, i) =>
       `<button type="button" class="prep-day${on.includes(i) ? " on" : ""}" data-pday="${esc(
         p.id
-      )}|${i}" aria-pressed="${on.includes(i)}" title="${d}">${d[0]}</button>`
+      )}|${i}" aria-pressed="${on.includes(i)}" title="${d}">${DAYS_SHORT[i]}</button>`
   ).join("")}</div>`;
 }
 

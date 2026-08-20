@@ -68,7 +68,6 @@ export function renderGuide() {
     ${appHeader("guide")}
     <main class="wrap detail">
       <header class="detail-head">
-        <p class="detail-cat">Glutenfri</p>
         <h1>Glutenfri-guide</h1>
         <p class="lead">Rutiner for trygg oppbevaring, tilberedning og servering av glutenfri mat.</p>
       </header>

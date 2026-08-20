@@ -16,6 +16,7 @@ export const CHANGELOG = [
       "«Sist oppdatert»-dato vises på retter og oppskrifter.",
       "Nyhetsfelt øverst på forsiden (Nyhet/Endring med dato) — redigerbart av admin (legg til / rediger / slett).",
       "«Meld feil eller forslag» på hver rett/oppskrift — kjøkkenet sender melding til kjedekontoret, som leser og behandler dem i en innboks i appen.",
+      "Lesbarhets- og kjøkken-UX-runde: kompakt nyhetsfelt (nav nærmere toppen), tydelige ukedags-forkortelser i prep (Ma/Ti/On/To…), 1-kolonne menykort og større trykkflater på mobil, og sterkere tekstkontrast.",
       "Automatisk oppdatering: nye versjoner dukker opp av seg selv på enhetene.",
       "Allergener avklart av Matfaglig (Torkil): croissant-deig inneholder egg (lagt til på croissant-rettene); bagel-deig uten sesam/melk; pesto uten nøtter. «Allergener uavklart»-merkene er fjernet på de 7 aktuelle rettene.",
     ],

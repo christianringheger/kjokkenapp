@@ -27,14 +27,22 @@ function newsItem(n) {
 function newsBlock(newsItems) {
   const list = newsItems && newsItems.length ? newsItems : NEWS;
   if (!list.length) return "";
-  const items = [...list]
-    .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
-    .map(newsItem)
-    .join("");
+  const sorted = [...list].sort((a, b) =>
+    a.date < b.date ? 1 : a.date > b.date ? -1 : 0
+  );
+  const [first, ...rest] = sorted;
+  // Vis nyeste øverst; resten bak en utfelling så navigasjonen holder seg nær toppen.
+  const more = rest.length
+    ? `<details class="news-more">
+        <summary>Vis ${rest.length} eldre oppdatering${rest.length > 1 ? "er" : ""}</summary>
+        <ul class="news-list">${rest.map(newsItem).join("")}</ul>
+      </details>`
+    : "";
   return `
     <section class="news" aria-label="Oppdateringer">
       <h2 class="news-title">Oppdateringer</h2>
-      <ul class="news-list">${items}</ul>
+      <ul class="news-list">${newsItem(first)}</ul>
+      ${more}
     </section>`;
 }
 
