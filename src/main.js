@@ -32,6 +32,7 @@ import {
 import { initMedia } from "./lib/media.js";
 import { initChecklist } from "./lib/checklist.js";
 import { initScale } from "./lib/scale.js";
+import { initReports } from "./lib/reports.js";
 import { renderAdmin } from "./ui/admin.js";
 import {
   renderHandleShell,
@@ -353,6 +354,7 @@ async function bootstrap() {
   initChecklist();
   initScale();
   initFavorites();
+  initReports();
   window.addEventListener("hashchange", render);
   app.innerHTML = `<main class="wrap"><p class="lead">Laster…</p></main>`;
   const [d, n] = await Promise.all([loadData(), loadNews()]);

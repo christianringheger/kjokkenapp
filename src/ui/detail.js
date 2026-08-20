@@ -132,6 +132,7 @@ export function renderDishDetail(d) {
       ${compSection}
       ${layers}
       ${pres}
+      ${reportSection(`dish:${d.id}`, d.name)}
       ${updatedLine(d)}
     </main>`;
 }
@@ -182,6 +183,7 @@ export function renderRecipeDetail(r) {
       ${ing}
       ${steps}
       ${usedBy}
+      ${reportSection(`recipe:${r.id}`, r.title)}
       ${updatedLine(r)}
     </main>`;
 }
@@ -195,6 +197,22 @@ function section(title, body) {
 function updatedLine(item) {
   const d = fmtDateNo(item && item._updated);
   return d ? `<p class="detail-updated">Sist oppdatert ${esc(d)}</p>` : "";
+}
+
+// «Meld feil»: sammenleggbart skjema som sender til kjedekontoret (reports.js).
+function reportSection(ref, title) {
+  return `
+    <section class="dsec report">
+      <button type="button" class="report-toggle" data-report-toggle>Meld feil eller forslag</button>
+      <form class="report-form" data-report-form hidden data-ref="${esc(ref)}" data-title="${esc(title)}">
+        <textarea class="ed-input ed-area" data-report-msg rows="3" maxlength="1500" placeholder="Beskriv feilen eller forslaget …"></textarea>
+        <input class="ed-input" data-report-name maxlength="120" placeholder="Ditt navn (valgfritt)" />
+        <div class="report-actions">
+          <button type="button" class="admin-btn" data-report-send>Send til kjedekontoret</button>
+          <span class="report-status" data-report-status></span>
+        </div>
+      </form>
+    </section>`;
 }
 
 function notFound(msg) {

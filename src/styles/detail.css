@@ -462,6 +462,88 @@
   color: var(--coral);
 }
 
+/* «Meld feil» på detaljsider */
+.report {
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+.report-toggle {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.report-toggle:hover {
+  color: var(--coral);
+}
+.report-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+  max-width: 480px;
+}
+.report-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.report-actions .admin-btn {
+  margin-top: 0;
+}
+.report-status {
+  font-size: 13px;
+  color: var(--muted);
+}
+.report-thanks {
+  margin: 12px 0 0;
+  font-weight: 600;
+  color: var(--green-deep);
+}
+
+/* Innboks (admin) */
+.rp-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--panel);
+}
+.rp-item.done {
+  opacity: 0.6;
+}
+.rp-main {
+  min-width: 0;
+}
+.rp-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+.rp-title {
+  font-weight: 700;
+}
+.rp-date {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.rp-msg {
+  margin: 0;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
 /* ---------- Medieblokk (bilde + video) øverst ---------- */
 .media {
   position: relative;

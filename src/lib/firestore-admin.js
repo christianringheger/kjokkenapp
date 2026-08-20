@@ -12,6 +12,7 @@ import {
   setDoc,
   addDoc,
   deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 
 // Hent hele samlingen sortert på `field` (standard _ord). `_id` = dokument-id.
@@ -34,6 +35,12 @@ export async function addDocTo(col, data) {
 export async function deleteDocById(col, id) {
   const { db } = initFirebase();
   await deleteDoc(doc(db, col, id));
+}
+
+// Målrettet oppdatering av utvalgte felt (ikke-destruktivt).
+export async function updateFields(col, id, fields) {
+  const { db } = initFirebase();
+  await updateDoc(doc(db, col, id), fields);
 }
 
 export async function fetchDoc(col, id) {
