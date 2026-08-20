@@ -846,10 +846,75 @@ body.lb-open {
 }
 .prep-item-top {
   display: flex;
-  align-items: baseline;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.prep-name {
+  flex: 1;
+  min-width: 0;
+}
+.prep-item-top .prep-meta {
+  margin-left: auto;
+}
+/* «Gjort i dag»-avkryssing */
+.prep-check {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--camel);
+  border-radius: 8px;
+  background: var(--bg);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+}
+.prep-check svg {
+  width: 18px;
+  height: 18px;
+  opacity: 0;
+  transition: opacity 0.12s;
+}
+.prep-item.done .prep-check {
+  background: var(--green);
+  border-color: var(--green);
+}
+.prep-item.done .prep-check svg {
+  opacity: 1;
+}
+.prep-item.done .prep-name {
+  text-decoration: line-through;
+  color: var(--faint);
+}
+.prep-item.done {
+  opacity: 0.72;
+}
+.prep-count-row {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
   flex-wrap: wrap;
+}
+.prep-reset {
+  font: inherit;
+  font-family: var(--signal);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--pill);
+  background: var(--panel);
+  color: var(--muted);
+  cursor: pointer;
+}
+.prep-reset:hover {
+  border-color: var(--coral);
+  color: var(--coral);
 }
 .prep-days {
   display: flex;

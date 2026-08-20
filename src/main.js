@@ -13,6 +13,8 @@ import {
   renderPrepResults,
   loadPrepDays,
   savePrepDays,
+  loadPrepDone,
+  savePrepDone,
 } from "./ui/prep.js";
 import {
   renderRavareShell,
@@ -68,7 +70,7 @@ const ravState = { rq: "" };
 const handleState = { items: loadHandle(), q: "" };
 
 // Prep: ukedager per oppgave (lagres lokalt) + valgt dagsfilter (-1 = alle).
-const prepState = { days: loadPrepDays(), filter: -1 };
+const prepState = { days: loadPrepDays(), filter: -1, done: loadPrepDone() };
 
 // Tegn menylista og koble søk/filter til resultatboksen.
 function renderList() {
@@ -245,8 +247,32 @@ function renderPrep() {
     update();
   });
 
-  // Legg/fjern en oppgave på en ukedag.
+  // Bevar scroll-posisjon ved gjentegning (så avkryssing ikke gir hopp).
+  const updateKeepScroll = () => {
+    const y = window.scrollY;
+    update();
+    window.scrollTo(0, y);
+  };
+
   results.addEventListener("click", (e) => {
+    // Hak av / av-hak «gjort i dag».
+    const doneBtn = e.target.closest("[data-pdone]");
+    if (doneBtn) {
+      const id = doneBtn.dataset.pdone;
+      if (prepState.done.has(id)) prepState.done.delete(id);
+      else prepState.done.add(id);
+      savePrepDone(prepState.done);
+      updateKeepScroll();
+      return;
+    }
+    // Nullstill alle avkryssinger.
+    if (e.target.closest("[data-preset]")) {
+      prepState.done.clear();
+      savePrepDone(prepState.done);
+      updateKeepScroll();
+      return;
+    }
+    // Legg/fjern en oppgave på en ukedag.
     const day = e.target.closest("[data-pday]");
     if (!day) return;
     const [id, idxRaw] = day.dataset.pday.split("|");
