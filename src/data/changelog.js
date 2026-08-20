@@ -16,6 +16,7 @@ export const CHANGELOG = [
       "«Sist oppdatert»-dato vises på retter og oppskrifter.",
       "Nyhetsfelt øverst på forsiden (Nyhet/Endring med dato) — redigerbart av admin.",
       "Automatisk oppdatering: nye versjoner dukker opp av seg selv på enhetene.",
+      "Allergener avklart av Matfaglig (Torkil): croissant-deig inneholder egg (lagt til på croissant-rettene); bagel-deig uten sesam/melk; pesto uten nøtter. «Allergener uavklart»-merkene er fjernet på de 7 aktuelle rettene.",
     ],
   },
 ];

@@ -4134,6 +4134,7 @@
       "cat": "paasmurt",
       "all": [
         "gluten",
+        "egg",
         "melk"
       ],
       "gf": false,
@@ -4192,9 +4193,7 @@
         "pdf": "JP_Bong_og_pa_smurtmanual_Sommer_2026.pdf",
         "page": 40
       },
-      "station": "bong",
-      "alReview": true,
-      "alReviewNote": "Egg (eggevask i croissant)? – avklares med Matfaglig"
+      "station": "bong"
     },
     {
       "id": "p28",
@@ -4202,6 +4201,7 @@
       "cat": "paasmurt",
       "all": [
         "gluten",
+        "egg",
         "melk",
         "sulfitt"
       ],
@@ -4282,9 +4282,7 @@
         "pdf": "JP_Bong_og_pa_smurtmanual_Sommer_2026.pdf",
         "page": 41
       },
-      "station": "bong",
-      "alReview": true,
-      "alReviewNote": "Egg (eggevask i croissant)? – avklares med Matfaglig"
+      "station": "bong"
     },
     {
       "id": "p29",
@@ -4797,9 +4795,7 @@
         "pdf": "JP_Bong_og_pa_smurtmanual_Sommer_2026.pdf",
         "page": 46
       },
-      "station": "bong",
-      "alReview": true,
-      "alReviewNote": "Bagel: sesam/melk i deig? – avklares med Matfaglig"
+      "station": "bong"
     },
     {
       "id": "p34",
@@ -4894,9 +4890,7 @@
         "pdf": "JP_Bong_og_pa_smurtmanual_Sommer_2026.pdf",
         "page": 47
       },
-      "station": "bong",
-      "alReview": true,
-      "alReviewNote": "Bagel: sesam/melk i deig? – avklares med Matfaglig"
+      "station": "bong"
     },
     {
       "id": "p35",
@@ -4983,9 +4977,7 @@
         "pdf": "JP_Bong_og_pa_smurtmanual_Sommer_2026.pdf",
         "page": 48
       },
-      "station": "bong",
-      "alReview": true,
-      "alReviewNote": "Bagel: sesam/melk i deig? + «chickenparm smøresalat» sammensetning? – avklares med Matfaglig"
+      "station": "bong"
     },
     {
       "id": "p36",
@@ -5071,9 +5063,7 @@
         "pdf": "JP_Bong_og_pa_smurtmanual_Sommer_2026.pdf",
         "page": 49
       },
-      "station": "bong",
-      "alReview": true,
-      "alReviewNote": "Bagel: sesam/melk? + pesto (melk/nøtter?) + salami (allergener?) – avklares med Matfaglig"
+      "station": "bong"
     },
     {
       "id": "d27",
@@ -5913,6 +5903,7 @@
       "cat": "cateringpakke",
       "all": [
         "gluten",
+        "egg",
         "melk"
       ],
       "gf": false,
@@ -5941,9 +5932,7 @@
       },
       "src": {
         "pdf": "JP_Catering_produksjonsmanual_Sommer_2026.pdf"
-      },
-      "alReview": true,
-      "alReviewNote": "Egg (eggevask i croissant)? – avklares med Matfaglig"
+      }
     },
     {
       "id": "d59",
